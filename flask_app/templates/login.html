@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5DC; /* Soft Beige */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333333; /* Charcoal Gray for text */
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            margin: auto;
+            background-color: #FFFFFF; /* Warm White for background */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Header styling */
+        header h2 {
+            color: #333333; /* Charcoal Gray */
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Form elements styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #D8D8D8; /* Light Taupe */
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Smaller button styling */
+        button {
+            padding: 6px 15px; /* Smaller padding for height and width */
+            background-color: #333333; /* Charcoal Gray */
+            color: #FFFFFF; /* Warm White for text */
+            border: none;
+            border-radius: 5px;
+            font-size: 14px; /* Smaller font size */
+            cursor: pointer;
+            font-weight: bold;
+            max-width: 150px; /* Max width for the button */
+            margin: 0 auto; /* Center the button */
+        }
+
+        button:hover {
+            background-color: #555555;
+        }
+
+        /* Link styling */
+        p {
+            color: #333333;
+            font-size: 14px;
+        }
+
+        a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Login</h2>
+        </header>
+        <main>
+            <form action="{{ url_for('login') }}" method="POST" class="form-container">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a>.</p>
+        </main>
+    </div>
+</body>
+</html>

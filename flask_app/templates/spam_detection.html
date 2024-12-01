@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Detection</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5DC; /* Soft Beige */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333333; /* Charcoal Gray for text */
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            margin: auto;
+            background-color: #FFFFFF; /* Warm White for background */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Header styling */
+        header h2 {
+            color: #333333; /* Charcoal Gray */
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Form container styling */
+        .form-container {
+            margin-top: 20px;
+        }
+
+        /* Form elements styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #D8D8D8; /* Light Taupe */
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+        }
+
+        /* Smaller button styling */
+        button {
+            padding: 6px 15px; /* Smaller padding for height and width */
+            background-color: #333333; /* Charcoal Gray */
+            color: #FFFFFF; /* Warm White for text */
+            border: none;
+            border-radius: 5px;
+            font-size: 14px; /* Smaller font size */
+            cursor: pointer;
+            font-weight: bold;
+            max-width: 150px; /* Max width for the button */
+            margin: 0 auto; /* Center the button */
+        }
+
+        button:hover {
+            background-color: #555555;
+        }
+
+        /* Result text styling */
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333; /* Charcoal Gray */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Spam Email Detection</h2>
+        </header>
+        <main>
+            <form method="POST" class="form-container">
+                <textarea name="email_content" rows="10" placeholder="Enter the email content here..."></textarea>
+                <button type="submit">Check if Spam</button>
+            </form>
+            {% if result %}
+                <h3>{{ result }}</h3>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5DC; /* Soft Beige */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333333; /* Charcoal Gray for text */
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            margin: auto;
+            background-color: #FFFFFF; /* Warm White for background */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Header styling */
+        header h2 {
+            color: #333333; /* Charcoal Gray */
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Form elements styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #D8D8D8; /* Light Taupe */
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333333; /* Charcoal Gray */
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #555555;
+        }
+
+        /* Link styling */
+        p {
+            color: #333333;
+            font-size: 14px;
+        }
+
+        a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Password validation messages */
+        .validation-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        .valid {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Sign Up</h2>
+        </header>
+        <main>
+            <form action="{{ url_for('signup') }}" method="POST" class="form-container" id="signupForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+
+            <div id="passwordValidation">
+                <p id="passwordConditions" class="validation-message">
+                    <span id="length" class="invalid">At least 8 characters</span><br>
+                    <span id="uppercase" class="invalid">At least one uppercase letter</span><br>
+                    <span id="lowercase" class="invalid">At least one lowercase letter</span><br>
+                    <span id="number" class="invalid">At least one numeral</span><br>
+                    <span id="special" class="invalid">At least one special character (~!?#@$%^&*_-+()[]{}><\/|".:;)</span><br>
+                    <span id="noSpace" class="invalid">No spaces allowed</span><br>
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById("password").addEventListener("input", function () {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            
+            // Validate password length
+            var lengthValid = password.length >= 8 && password.length <= 128;
+            document.getElementById("length").className = lengthValid ? "valid" : "invalid";
+
+            // Validate uppercase letter
+            var uppercaseValid = /[A-Z]/.test(password);
+            document.getElementById("uppercase").className = uppercaseValid ? "valid" : "invalid";
+
+            // Validate lowercase letter
+            var lowercaseValid = /[a-z]/.test(password);
+            document.getElementById("lowercase").className = lowercaseValid ? "valid" : "invalid";
+
+            // Validate number
+            var numberValid = /\d/.test(password);
+            document.getElementById("number").className = numberValid ? "valid" : "invalid";
+
+            // Validate special character
+            var specialValid = /[~!?#@$%^&*_\-+\(\)\[\]\{\}>/\\|".:;]/.test(password);
+            document.getElementById("special").className = specialValid ? "valid" : "invalid";
+
+            // Validate no spaces
+            var noSpaceValid = !/\s/.test(password);
+            document.getElementById("noSpace").className = noSpaceValid ? "valid" : "invalid";
+
+            // Validate confirm password match
+            if (password !== confirmPassword) {
+                document.getElementById("confirm_password").setCustomValidity("Passwords do not match.");
+            } else {
+                document.getElementById("confirm_password").setCustomValidity("");
+            }
+        });
+
+        // Add real-time validation for confirm password field
+        document.getElementById("confirm_password").addEventListener("input", function () {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            
+            if (password !== confirmPassword) {
+                document.getElementById("confirm_password").setCustomValidity("Passwords do not match.");
+            } else {
+                document.getElementById("confirm_password").setCustomValidity("");
+            }
+        });
+
+        document.getElementById("signupForm").addEventListener("submit", function (event) {
+            if (document.getElementById("length").className !== "valid" ||
+                document.getElementById("uppercase").className !== "valid" ||
+                document.getElementById("lowercase").className !== "valid" ||
+                document.getElementById("number").className !== "valid" ||
+                document.getElementById("special").className !== "valid" ||
+                document.getElementById("noSpace").className !== "valid" ||
+                document.getElementById("confirm_password").value !== document.getElementById("password").value) {
+                event.preventDefault();
+                alert("Please meet all the password requirements.");
+            }
+        });
+    </script>
+</body>
+</html>

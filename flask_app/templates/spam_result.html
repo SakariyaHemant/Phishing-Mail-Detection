@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Result</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5F5DC; /* Soft Beige */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333333; /* Charcoal Gray for text */
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            margin: auto;
+            background-color: #FFFFFF; /* Warm White for background */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Header styling */
+        h2 {
+            color: #333333; /* Charcoal Gray */
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        strong {
+            color: #333333;
+        }
+
+        /* Link styling */
+        a {
+            color: #333333;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Spam Detection Result</h2>
+        <p>The entered text is: <strong>{{ result }}</strong></p>
+        <a href="{{ url_for('spam_detection') }}">Go back</a>
+    </div>
+</body>
+</html>
